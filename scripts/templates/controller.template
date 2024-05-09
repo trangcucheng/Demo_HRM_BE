@@ -1,0 +1,45 @@
+import { Body, Controller, Delete, Get, Param, ParseIntPipe, Patch, Post, Query } from '@nestjs/common';
+import { ApiBasicAuth, ApiQuery, ApiTags } from '@nestjs/swagger';
+import { Permission } from '~/common/decorators/permission.decorator';
+import { FilterDto } from '~/common/dtos/filter.dto';
+import { Create{{nameCapitalized}}Dto } from './dto/create-{{moduleName}}.dto';
+import { Update{{nameCapitalized}}Dto } from './dto/update-{{moduleName}}.dto';
+import { {{nameCapitalized}}Service } from './{{moduleName}}.service';
+
+@ApiTags('{{nameCapitalized}}')
+@ApiBasicAuth('authorization')
+@Controller('{{moduleName}}')
+export class {{nameCapitalized}}Controller {
+    constructor(private readonly {{name}}Service: {{nameCapitalized}}Service) {}
+
+    @Permission('{{name}}:create')
+    @Post()
+    create(@Body() create{{nameCapitalized}}Dto: Create{{nameCapitalized}}Dto) {
+        return this.{{name}}Service.create(create{{nameCapitalized}}Dto);
+    }
+
+    @Permission('{{name}}:findAll')
+    @Get()
+    @ApiQuery({ type: FilterDto })
+    findAll(@Query() queries) {
+        return this.{{name}}Service.findAll({ ...queries });
+    }
+
+    @Permission('{{name}}:findOne')
+    @Get(':id')
+    findOne(@Param('id', ParseIntPipe) id: string) {
+        return this.{{name}}Service.findOne(+id);
+    }
+
+    @Permission('{{name}}:update')
+    @Patch(':id')
+    update(@Param('id', ParseIntPipe) id: string, @Body() update{{nameCapitalized}}Dto: Update{{nameCapitalized}}Dto) {
+        return this.{{name}}Service.update(+id, update{{nameCapitalized}}Dto);
+    }
+
+    @Permission('{{name}}:remove')
+    @Delete(':id')
+    remove(@Param('id', ParseIntPipe) id: string) {
+        return this.{{name}}Service.remove(+id);
+    }
+}

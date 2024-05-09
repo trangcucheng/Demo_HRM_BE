@@ -1,0 +1,21 @@
+version: '3.3'
+services:
+    project:
+        build:
+            context: .
+            dockerfile: Dockerfile
+        image: ${APP_NAME}
+        container_name: ${APP_NAME}
+        networks:
+            - myNetwork
+        ports:
+            - '${PORT}:${PORT}'
+        volumes:
+            - './public:/home/project/public'
+        restart: always
+        environment:
+            - REDIS_PASSWORD=${REDIS_PASSWORD}
+            - REDIS_PREFIX=${REDIS_PREFIX}
+
+networks:
+    myNetwork:
