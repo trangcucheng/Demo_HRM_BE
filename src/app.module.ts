@@ -73,6 +73,7 @@ import { RiceCouponModule } from '~/modules/rice-coupon/rice-coupon.module';
 import { FoodVoucherModule } from '~/modules/food-voucher/food-voucher.module';
 import { LeavingLateEarlyModule } from '~/modules/leaving-late-early/leaving-late-early.module';
 import { ForgotCheckinOutModule } from '~/modules/forgot-checkin-out/forgot-checkin-out.module';
+import { MongooseModule } from '@nestjs/mongoose';
 
 @Module({
     imports: [
@@ -85,6 +86,13 @@ import { ForgotCheckinOutModule } from '~/modules/forgot-checkin-out/forgot-chec
         RedisModule.forRootAsync({
             imports: [ConfigModule],
             useFactory: (configService: ConfigService) => configService.get('redis') || {},
+            inject: [ConfigService],
+        }),
+        MongooseModule.forRootAsync({
+            imports: [ConfigModule],
+            useFactory: async (configService: ConfigService) => ({
+                uri: configService.get<string>('MONGODB_URI'),
+            }),
             inject: [ConfigService],
         }),
         I18nModule.forRoot({
@@ -179,7 +187,7 @@ export class AppModule implements OnModuleInit {
         private readonly permissionRepositopry: PermissionRepository,
         private readonly cacheService: CacheService,
         private readonly utilService: UtilService,
-    ) {}
+    ) { }
     configure(consumer: MiddlewareConsumer) {
         consumer
             .apply(AuthMiddleware, LogMiddleware)

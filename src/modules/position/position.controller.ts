@@ -10,7 +10,7 @@ import { PositionService } from './position.service';
 @ApiBasicAuth('authorization')
 @Controller('position')
 export class PositionController {
-    constructor(private readonly positionService: PositionService) {}
+    constructor(private readonly positionService: PositionService) { }
 
     @Permission('position:create')
     @Post()
@@ -18,16 +18,16 @@ export class PositionController {
         return this.positionService.create(createPositionDto);
     }
 
-    @Permission('position:export')
-    @Get('export')
-    @ApiQuery({
-        name: 'search',
-        type: String,
-        required: false,
-    })
-    export(@Query() queries) {
-        return this.positionService.export({ ...queries });
-    }
+    // @Permission('position:export')
+    // @Get('export')
+    // @ApiQuery({
+    //     name: 'search',
+    //     type: String,
+    //     required: false,
+    // })
+    // export(@Query() queries) {
+    //     return this.positionService.export({ ...queries });
+    // }
 
     @Permission('position:findAll')
     @Get()

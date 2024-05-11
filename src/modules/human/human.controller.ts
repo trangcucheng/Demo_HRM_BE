@@ -30,7 +30,7 @@ import { AuthGuard } from '../auth/guards/auth.guard';
 @ApiBasicAuth('authorization')
 @Controller('human')
 export class HumanController {
-    constructor(private readonly humanService: HumanService, private readonly calendarService: CalendarService) {}
+    constructor(private readonly humanService: HumanService, private readonly calendarService: CalendarService) { }
 
     @UseGuards(AuthGuard)
     @ApiConsumes('multipart/form-data')
@@ -95,11 +95,11 @@ export class HumanController {
         return this.calendarService.findAllByUserLogin({ ...queries });
     }
 
-    @Permission('human:export')
-    @Get('export')
-    export(@Res() res) {
-        return this.humanService.export(res);
-    }
+    // @Permission('human:export')
+    // @Get('export')
+    // export(@Res() res) {
+    //     return this.humanService.export(res);
+    // }
 
     @Permission('human:findOne')
     @Get(':id')
