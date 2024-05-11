@@ -88,13 +88,13 @@ import { MongooseModule } from '@nestjs/mongoose';
             useFactory: (configService: ConfigService) => configService.get('redis') || {},
             inject: [ConfigService],
         }),
-        MongooseModule.forRootAsync({
-            imports: [ConfigModule],
-            useFactory: async (configService: ConfigService) => ({
-                uri: configService.get<string>('MONGODB_URI'),
-            }),
-            inject: [ConfigService],
-        }),
+        // MongooseModule.forRootAsync({
+        //     imports: [ConfigModule],
+        //     useFactory: async (configService: ConfigService) => ({
+        //         uri: configService.get<string>('MONGODB_URI'),
+        //     }),
+        //     inject: [ConfigService],
+        // }),
         I18nModule.forRoot({
             fallbackLanguage: 'en',
             loaderOptions: {
