@@ -17,15 +17,16 @@ async function bootstrap() {
     /* SSl config */
     const keyPath = './secrets/privkey.pem'; // /etc/letsencrypt/live/[domain]/privkey.pem
     const certPath = './secrets/fullchain.pem'; // /etc/letsencrypt/live/[domain]/fullchain.pem
-    let httpsOptions;
-    if (fs.existsSync(keyPath) && fs.existsSync(certPath)) {
-        httpsOptions = {
-            key: fs.readFileSync(keyPath),
-            cert: fs.readFileSync(certPath),
-        };
-    }
+    // let httpsOptions;
+    // if (fs.existsSync(keyPath) && fs.existsSync(certPath)) {
+    //     httpsOptions = {
+    //         key: fs.readFileSync(keyPath),
+    //         cert: fs.readFileSync(certPath),
+    //     };
+    // }
 
-    const app = await NestFactory.create<NestExpressApplication>(AppModule, { httpsOptions });
+    // const app = await NestFactory.create<NestExpressApplication>(AppModule, { httpsOptions });
+    const app = await NestFactory.create<NestExpressApplication>(AppModule);
 
     /* app config */
     app.enableVersioning({ type: VersioningType.URI });
