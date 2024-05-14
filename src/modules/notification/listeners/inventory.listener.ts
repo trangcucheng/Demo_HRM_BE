@@ -5,7 +5,7 @@ import { NotificationService } from '~/modules/notification/notification.service
 
 @Injectable()
 export class InventoryListener {
-    constructor(private readonly notificationService: NotificationService, private readonly database: DatabaseService) {}
+    constructor(private readonly notificationService: NotificationService, private readonly database: DatabaseService) { }
 
     @OnEvent('inventory.notifyLimits')
     async handleInventoryNotifyLimitsEvent(

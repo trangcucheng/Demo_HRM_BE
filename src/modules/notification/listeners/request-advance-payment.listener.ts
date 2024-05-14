@@ -6,7 +6,7 @@ import { RequestAdvancePaymentEvent } from '~/modules/request-advance-payment/ev
 
 @Injectable()
 export class RequestAdvancePaymentListener {
-    constructor(private readonly notificationService: NotificationService, private readonly database: DatabaseService) {}
+    constructor(private readonly notificationService: NotificationService, private readonly database: DatabaseService) { }
 
     @OnEvent('requestAdvancePayment.created')
     async handleRequestAdvancePaymentCreatedEvent(event: RequestAdvancePaymentEvent) {

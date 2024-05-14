@@ -6,7 +6,7 @@ import { NotificationService } from '~/modules/notification/notification.service
 
 @Injectable()
 export class ConfirmPortalListener {
-    constructor(private readonly notificationService: NotificationService, private readonly database: DatabaseService) {}
+    constructor(private readonly notificationService: NotificationService, private readonly database: DatabaseService) { }
 
     @OnEvent('confirmPortal.created')
     async handleConfirmPortalCreatedEvent(event: ConfirmPortalEvent) {

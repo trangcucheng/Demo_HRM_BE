@@ -6,7 +6,7 @@ import { WarehousingBillEvent } from '~/modules/warehousing-bill/events/warehous
 
 @Injectable()
 export class WarehousingBillListener {
-    constructor(private readonly nofiticationService: NotificationService, private readonly database: DatabaseService) {}
+    constructor(private readonly nofiticationService: NotificationService, private readonly database: DatabaseService) { }
 
     @OnEvent('warehousingBill.created')
     async handleWarehousingBillCreatedEvent(event: WarehousingBillEvent) {

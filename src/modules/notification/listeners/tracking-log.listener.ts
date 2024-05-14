@@ -6,7 +6,7 @@ import { TrackingLogEvent } from '~/modules/tracking-log/events/tracking-log.eve
 
 @Injectable()
 export class TrackingLogListener {
-    constructor(private readonly notificationService: NotificationService, private readonly database: DatabaseService) {}
+    constructor(private readonly notificationService: NotificationService, private readonly database: DatabaseService) { }
 
     @OnEvent('trackingLog.created')
     async handleTrackingLogCreatedEvent(event: TrackingLogEvent) {

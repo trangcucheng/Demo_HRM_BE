@@ -6,7 +6,7 @@ import { ProposalEvent } from '~/modules/proposal/events/proposal.event';
 
 @Injectable()
 export class ProposalListener {
-    constructor(private readonly nofiticationService: NotificationService, private readonly database: DatabaseService) {}
+    constructor(private readonly nofiticationService: NotificationService, private readonly database: DatabaseService) { }
 
     @OnEvent('proposal.created')
     async handleProposalCreatedEvent(event: ProposalEvent) {

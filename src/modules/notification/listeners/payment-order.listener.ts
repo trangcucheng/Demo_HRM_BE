@@ -6,7 +6,7 @@ import { PaymentOrderEvent } from '~/modules/payment-order/events/payment-order.
 
 @Injectable()
 export class PaymentOrderListener {
-    constructor(private readonly notificationService: NotificationService, private readonly database: DatabaseService) {}
+    constructor(private readonly notificationService: NotificationService, private readonly database: DatabaseService) { }
 
     @OnEvent('paymentOrder.created')
     async handlePaymentOrderCreatedEvent(event: PaymentOrderEvent) {

@@ -6,7 +6,7 @@ import { RequestOvertimeEvent } from '~/modules/request-overtime/events/request-
 
 @Injectable()
 export class RequestOvertimeListener {
-    constructor(private readonly notificationService: NotificationService, private readonly database: DatabaseService) {}
+    constructor(private readonly notificationService: NotificationService, private readonly database: DatabaseService) { }
 
     @OnEvent('requestOvertime.created')
     async handleRequestOvertimeCreatedEvent(event: RequestOvertimeEvent) {

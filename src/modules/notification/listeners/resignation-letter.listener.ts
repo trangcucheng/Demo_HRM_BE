@@ -6,7 +6,7 @@ import { ResignationLetterEvent } from '~/modules/resignation-letter/events/resi
 
 @Injectable()
 export class ResignationLetterListener {
-    constructor(private readonly notificationService: NotificationService, private readonly database: DatabaseService) {}
+    constructor(private readonly notificationService: NotificationService, private readonly database: DatabaseService) { }
 
     @OnEvent('resignationLetter.created')
     async handleResignationLetterCreatedEvent(event: ResignationLetterEvent) {

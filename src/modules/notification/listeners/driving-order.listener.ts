@@ -6,7 +6,7 @@ import { NotificationService } from '~/modules/notification/notification.service
 
 @Injectable()
 export class DrivingOrderListener {
-    constructor(private readonly notificationService: NotificationService, private readonly database: DatabaseService) {}
+    constructor(private readonly notificationService: NotificationService, private readonly database: DatabaseService) { }
 
     @OnEvent('drivingOrder.created')
     async handleDrivingOrderCreatedEvent(event: DrivingOrderEvent) {

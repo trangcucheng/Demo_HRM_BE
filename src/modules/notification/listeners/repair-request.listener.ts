@@ -6,7 +6,7 @@ import { RepairRequestEvent } from '~/modules/repair-request/events/repair-reque
 
 @Injectable()
 export class RepairRequestListener {
-    constructor(private readonly notificationService: NotificationService, private readonly database: DatabaseService) {}
+    constructor(private readonly notificationService: NotificationService, private readonly database: DatabaseService) { }
 
     @OnEvent('repairRequest.created')
     async handleRepairRequestCreatedEvent(event: RepairRequestEvent) {

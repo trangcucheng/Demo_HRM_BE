@@ -6,7 +6,7 @@ import { RiceCouponEvent } from '~/modules/rice-coupon/events/rice-coupon.event'
 
 @Injectable()
 export class RiceCouponListener {
-    constructor(private readonly notificationService: NotificationService, private readonly database: DatabaseService) {}
+    constructor(private readonly notificationService: NotificationService, private readonly database: DatabaseService) { }
 
     @OnEvent('riceCoupon.created')
     async handleRiceCouponCreatedEvent(event: RiceCouponEvent) {

@@ -14,8 +14,11 @@ import { TravelPaperListener } from '~/modules/notification/listeners/travel-pap
 import { ConfirmPortalListener } from '~/modules/notification/listeners/confirm-portal.listener';
 import { DrivingOrderListener } from './listeners/driving-order.listener';
 import { LeaveApplicationListener } from './listeners/leave-application.listener';
+import { MongooseModule } from '@nestjs/mongoose';
+import { Notification, NotificationSchema } from '~/modules/notification/model/notification.model';
 
 @Module({
+    imports: [MongooseModule.forFeature([{ name: Notification.name, schema: NotificationSchema }])],
     controllers: [NotificationController],
     providers: [
         NotificationService,
@@ -32,6 +35,7 @@ import { LeaveApplicationListener } from './listeners/leave-application.listener
         ConfirmPortalListener,
         DrivingOrderListener,
         LeaveApplicationListener,
+        // Notification,
     ],
 })
-export class NotificationModule {}
+export class NotificationModule { }

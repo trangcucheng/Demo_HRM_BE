@@ -6,7 +6,7 @@ import { FoodVoucherEvent } from '~/modules/food-voucher/events/food-voucher.eve
 
 @Injectable()
 export class FoodVoucherListener {
-    constructor(private readonly notificationService: NotificationService, private readonly database: DatabaseService) {}
+    constructor(private readonly notificationService: NotificationService, private readonly database: DatabaseService) { }
 
     @OnEvent('foodVoucher.created')
     async handleFoodVoucherCreatedEvent(event: FoodVoucherEvent) {

@@ -1,31 +1,43 @@
-// notification.model.ts
+import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
+import { Document } from 'mongoose';
 
-import mongoose, { Schema, Document } from 'mongoose';
+export type NotificationDocument = Notification & Document;
 
-export interface INotification extends Document {
+@Schema()
+export class Notification {
+
+    @Prop({ required: true })
     type: string;
-    is_read: boolean;
-    receiver_id: number;
-    sender_id: number;
+
+    @Prop({ default: false })
+    isRead: boolean;
+
+    @Prop({ required: true })
+    receiverId: number;
+
+    @Prop({ required: true })
+    senderId: number;
+
+    @Prop({ required: true })
     link: string;
+
+    @Prop({ required: true })
     entity: string;
-    entity_id: number;
-    created_at: Date;
-    updated_at: Date;
-    deleted_at: Date;
+
+    @Prop({ required: true })
+    entityId: number;
+
+    @Prop({ type: [{ lang: String, title: String, content: String }] })
+    details: { lang: string; title: string; content: string }[];
+
+    @Prop({ default: Date.now })
+    createdAt: Date;
+
+    @Prop({ default: Date.now })
+    updatedAt: Date;
+
+    @Prop()
+    deletedAt?: Date;
 }
 
-const notificationSchema: Schema = new Schema({
-    type: { type: String, required: true },
-    is_read: { type: Boolean, default: false },
-    receiver_id: { type: Number, required: true },
-    sender_id: { type: Number, required: true },
-    link: { type: String, required: true },
-    entity: { type: String, required: true },
-    entity_id: { type: Number, required: true },
-    created_at: { type: Date, default: Date.now },
-    updated_at: { type: Date, default: Date.now },
-    deleted_at: { type: Date, default: null },
-});
-
-export default mongoose.model<INotification>('Notification', notificationSchema);
+export const NotificationSchema = SchemaFactory.createForClass(Notification);

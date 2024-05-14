@@ -6,7 +6,7 @@ import { NotificationService } from '~/modules/notification/notification.service
 
 @Injectable()
 export class ForgotCheckinOutListener {
-    constructor(private readonly notificationService: NotificationService, private readonly database: DatabaseService) {}
+    constructor(private readonly notificationService: NotificationService, private readonly database: DatabaseService) { }
 
     @OnEvent('forgotCheckinOut.created')
     async handleForgotCheckinOutCreatedEvent(event: ForgotCheckinOutEvent) {

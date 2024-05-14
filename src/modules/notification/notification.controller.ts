@@ -10,7 +10,7 @@ import { NOTIFICATION_TYPE } from '~/common/enums/enum';
 @ApiBasicAuth('authorization')
 @Controller('notification')
 export class NotificationController {
-    constructor(private readonly notificationService: NotificationService) {}
+    constructor(private readonly notificationService: NotificationService) { }
 
     @Permission(BYPASS_PERMISSION)
     @Get()
@@ -46,6 +46,6 @@ export class NotificationController {
     @Permission(BYPASS_PERMISSION)
     @Patch(':id/mark-as-read')
     markAsRead(@Param('id') id: string) {
-        return this.notificationService.markAsRead(+id);
+        return this.notificationService.markAsRead(id);
     }
 }

@@ -6,7 +6,7 @@ import { NotificationService } from '~/modules/notification/notification.service
 
 @Injectable()
 export class PaymentRequestListListener {
-    constructor(private readonly notificationService: NotificationService, private readonly database: DatabaseService) {}
+    constructor(private readonly notificationService: NotificationService, private readonly database: DatabaseService) { }
 
     @OnEvent('paymentRequestList.created')
     async handlePaymentRequestListCreatedEvent(event: PaymentRequestListEvent) {

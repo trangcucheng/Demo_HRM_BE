@@ -5,7 +5,7 @@ import { NotificationService } from '~/modules/notification/notification.service
 
 @Injectable()
 export class OrderListener {
-    constructor(private readonly notificationService: NotificationService, private readonly database: DatabaseService) {}
+    constructor(private readonly notificationService: NotificationService, private readonly database: DatabaseService) { }
 
     @OnEvent('order.created')
     async handleOrderCreatedEvent(event: any) {

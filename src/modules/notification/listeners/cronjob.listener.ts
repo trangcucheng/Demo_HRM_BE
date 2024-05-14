@@ -6,7 +6,7 @@ import { NotificationService } from '~/modules/notification/notification.service
 
 @Injectable()
 export class CronJobListener {
-    constructor(private readonly notificationService: NotificationService, private readonly database: DatabaseService) {}
+    constructor(private readonly notificationService: NotificationService, private readonly database: DatabaseService) { }
 
     @OnEvent('cronjob.expiredProduct')
     async handleCronJobExpiredProductEvent(event: CronJobEvent) {

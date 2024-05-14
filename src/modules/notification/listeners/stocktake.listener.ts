@@ -6,7 +6,7 @@ import { StocktakeEvent } from '~/modules/stocktake/events/stocktake.event';
 
 @Injectable()
 export class StocktakeListener {
-    constructor(private readonly notificationService: NotificationService, private readonly database: DatabaseService) {}
+    constructor(private readonly notificationService: NotificationService, private readonly database: DatabaseService) { }
 
     @OnEvent('stocktake.created')
     async handleStocktakeCreatedEvent(event: StocktakeEvent) {

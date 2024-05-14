@@ -6,7 +6,7 @@ import { TravelPaperEvent } from '~/modules/travel-paper/events/travel-paper.eve
 
 @Injectable()
 export class TravelPaperListener {
-    constructor(private readonly notificationService: NotificationService, private readonly database: DatabaseService) {}
+    constructor(private readonly notificationService: NotificationService, private readonly database: DatabaseService) { }
 
     @OnEvent('travelPaper.created')
     async handleTravelPaperCreatedEvent(event: TravelPaperEvent) {

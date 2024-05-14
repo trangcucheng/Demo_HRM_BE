@@ -74,7 +74,7 @@ import { FoodVoucherModule } from '~/modules/food-voucher/food-voucher.module';
 import { LeavingLateEarlyModule } from '~/modules/leaving-late-early/leaving-late-early.module';
 import { ForgotCheckinOutModule } from '~/modules/forgot-checkin-out/forgot-checkin-out.module';
 import { MongooseModule } from '@nestjs/mongoose';
-
+import { Notification, NotificationSchema } from '~/modules/notification/model/notification.model';
 @Module({
     imports: [
         ConfigModule.forRoot({
@@ -95,6 +95,7 @@ import { MongooseModule } from '@nestjs/mongoose';
             }),
             inject: [ConfigService],
         }),
+        MongooseModule.forFeature([{ name: Notification.name, schema: NotificationSchema }]),
         I18nModule.forRoot({
             fallbackLanguage: 'en',
             loaderOptions: {
