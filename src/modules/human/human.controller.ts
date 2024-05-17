@@ -25,15 +25,6 @@ import { FileInterceptor } from '@nestjs/platform-express';
 import { multerOptions } from '~/config/fileUpload.config';
 import { HUMAN_DASHBOARD_TYPE } from '~/common/enums/enum';
 import { AuthGuard } from '../auth/guards/auth.guard';
-import * as Minio from 'minio';
-import fs from 'fs';
-const minioClient: Minio.Client = new Minio.Client({
-    endPoint: 'play.min.io',
-    port: 9000,
-    useSSL: false,
-    accessKey: 'HE2getRa3nM0bDUFafrJ',
-    secretKey: 'rOBnWrDSJTIuW0tsUvx3G78F8hI4KbHpamYWyyli',
-});
 
 @ApiTags('Human')
 @ApiBasicAuth('authorization')
@@ -47,23 +38,6 @@ export class HumanController {
     @Post()
     @UseInterceptors(FileInterceptor('avatar', multerOptions()))
     create(@Body() createHumanDto: CreateHumanDto, @UploadedFile() avatar: Express.Multer.File) {
-        if (avatar) {
-            fs.readFile(avatar.path, (err, data) => {
-                if (err) {
-                    console.error('Error reading avatar:', err);
-                    return;
-                }
-                // Data là buffer của avatar
-                minioClient.putObject('image', avatar.originalname, data, Buffer.byteLength(data), (err: Error | null, objInfo: any) => {
-                    if (err) {
-                        console.error('Error uploading avatar:', err);
-                    } else {
-                        console.log(`avatar ${avatar.originalname} uploaded successfully!`);
-                        console.log(objInfo);
-                    }
-                });
-            });
-        }
         return this.humanService.create(createHumanDto, avatar);
     }
 
