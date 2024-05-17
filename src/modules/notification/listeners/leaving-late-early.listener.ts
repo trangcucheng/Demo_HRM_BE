@@ -45,7 +45,6 @@ export class LeavingLateEarlyListener {
     async handleLeavingLateEarlyPendingEvent(event: LeavingLateEarlyEvent) {
         const entity = await this.database.leavingLateEarly.findOneBy({ id: event.id });
         if (!entity) return;
-
         const receiverIds = await this.database.getUserIdsByPermission('leavingLateEarly:headApprove');
         this.notificationService.createNotification({
             entity: 'leavingLateEarly',
@@ -77,6 +76,7 @@ export class LeavingLateEarlyListener {
     @OnEvent('leavingLateEarly.approved')
     async handleLeavingLateEarlyApprovedEvent(event: LeavingLateEarlyEvent) {
         const entity = await this.database.leavingLateEarly.findOneBy({ id: event.id });
+
         if (!entity) return;
 
         const receiverIds = await this.database.getUserIdsByPermission('leavingLateEarly:create');

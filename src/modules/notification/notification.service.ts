@@ -134,6 +134,7 @@ export class NotificationService {
         link: string;
         details: { lang: string; title: string; content: string }[];
     }) {
+
         if (!data.receiverIds || data.receiverIds.length === 0) return;
 
         const notifications = data.receiverIds
