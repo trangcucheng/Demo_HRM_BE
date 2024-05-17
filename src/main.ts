@@ -12,27 +12,29 @@ import { bootstrapMoment } from '~/bootstraps/moment.bootstrap';
 import { bootstrapSocket } from '~/bootstraps/socket.bootstrap';
 import { bootstrapSwagger } from '~/bootstraps/swagger.bootstrap';
 import { bootstrapValidation } from '~/bootstraps/validation.bootstrap';
+import * as bodyParser from 'body-parser';
 
 async function bootstrap() {
     /* SSl config */
-    const keyPath = './secrets/privkey.pem'; // /etc/letsencrypt/live/[domain]/privkey.pem
-    const certPath = './secrets/fullchain.pem'; // /etc/letsencrypt/live/[domain]/fullchain.pem
-    // let httpsOptions;
-    // if (fs.existsSync(keyPath) && fs.existsSync(certPath)) {
-    //     httpsOptions = {
-    //         key: fs.readFileSync(keyPath),
-    //         cert: fs.readFileSync(certPath),
-    //     };
-    // }
+    const keyPath = '../tintuc.me-ssl-bundle/private.key.pem'; // /etc/letsencrypt/live/[domain]/privkey.pem
+    const certPath = '../tintuc.me-ssl-bundle/domain.cert.pem'; // /etc/letsencrypt/live/[domain]/fullchain.pem
+    let httpsOptions;
+    if (fs.existsSync(keyPath) && fs.existsSync(certPath)) {
+        httpsOptions = {
+            key: fs.readFileSync(keyPath),
+            cert: fs.readFileSync(certPath),
+        };
+    }
 
-    // const app = await NestFactory.create<NestExpressApplication>(AppModule, { httpsOptions });
-    const app = await NestFactory.create<NestExpressApplication>(AppModule);
+    const app = await NestFactory.create<NestExpressApplication>(AppModule, { httpsOptions });
 
     /* app config */
     app.enableVersioning({ type: VersioningType.URI });
     app.useStaticAssets(join(process.cwd(), 'public'), {
         prefix: '/public/',
     });
+    app.use(bodyParser.json({ limit: '50mb' }));
+    app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
 
     /* boostrap */
     // bootstrapLogging(app);
