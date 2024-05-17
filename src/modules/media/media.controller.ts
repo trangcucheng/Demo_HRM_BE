@@ -8,11 +8,23 @@ import { multerOptions } from '~/config/fileUpload.config';
 import { UtilService } from '~/shared/services';
 import { MediaService } from './media.service';
 
+import * as Minio from 'minio';
+import fs from 'fs';
+
+const minioClient: Minio.Client = new Minio.Client({
+    endPoint: 'play.min.io',
+    port: 9000,
+    useSSL: false,
+    accessKey: 'HE2getRa3nM0bDUFafrJ',
+    secretKey: 'rOBnWrDSJTIuW0tsUvx3G78F8hI4KbHpamYWyyli',
+});
+
+
 @ApiTags('Media')
 @ApiBasicAuth('authorization')
 @Controller('media')
 export class MediaController {
-    constructor(private readonly mediaService: MediaService, private readonly utilService: UtilService) {}
+    constructor(private readonly mediaService: MediaService, private readonly utilService: UtilService) { }
 
     @ApiConsumes('multipart/form-data')
     @ApiBody({
